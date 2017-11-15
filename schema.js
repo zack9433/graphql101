@@ -1,17 +1,5 @@
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql')
-
-const students = [
-  {
-    id: '1',
-    name: 'zack',
-    age: 33
-  },
-  {
-    id: '2',
-    name: 'donald',
-    age: 30
-  }
-]
+const axios = require('axios')
 
 const StudentType = new GraphQLObjectType({
   name: 'Student',
@@ -39,7 +27,7 @@ const RootQueryType = new GraphQLObjectType({
         }
       },
       resolve(parent, args) {
-        return students.find(student => student.id === args.id)
+        return axios.get(`http://localhost:3001/students/${args.id}`).then(res => res.data)
       }
     },
   }
