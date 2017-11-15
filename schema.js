@@ -89,6 +89,23 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         return axios.post(`http://localhost:3001/classes`, args).then(res => res.data)
       }
+    },
+    editClass: {
+      type: ClassType,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLString)
+        },
+        name: {
+          type: GraphQLString
+        },
+        description: {
+          type: GraphQLString
+        }
+      },
+      resolve(parent, args) {
+        return axios.patch(`http://localhost:3001/classes/${args.id}`, args).then(res => res.data)
+      }
     }
   }
 })
