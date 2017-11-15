@@ -1,5 +1,20 @@
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql')
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList } = require('graphql')
 const axios = require('axios')
+
+const ClassType = new GraphQLObjectType({
+  name: 'Class',
+  fields: {
+    id: {
+      type: GraphQLString
+    },
+    name: {
+      type: GraphQLString
+    },
+    description: {
+      type: GraphQLString
+    }
+  }
+})
 
 const StudentType = new GraphQLObjectType({
   name: 'Student',
@@ -12,6 +27,13 @@ const StudentType = new GraphQLObjectType({
     },
     age: {
       type: GraphQLInt
+    },
+    classes: {
+      type: new GraphQLList(ClassType),
+      resolve(parent) {
+        const resources = parent.classId.map(id => axios.get(`http://localhost:3001/classes/${id}`))
+        return axios.all(resources).then(results => results.map(result => result.data))
+      }
     }
   }
 })
