@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList } = require('graphql')
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema, GraphQLList, GraphQLNonNull } = require('graphql')
 const axios = require('axios')
 
 const ClassType = new GraphQLObjectType({
@@ -73,8 +73,29 @@ const RootQueryType = new GraphQLObjectType({
   }
 })
 
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addClass: {
+      type: ClassType,
+      args: {
+        name: {
+          type: new GraphQLNonNull(GraphQLString)
+        },
+        description: {
+          type: GraphQLString
+        }
+      },
+      resolve(parent, args) {
+        return axios.post(`http://localhost:3001/classes`, args).then(res => res.data)
+      }
+    }
+  }
+})
+
 const schema = new GraphQLSchema({
-  query: RootQueryType
+  query: RootQueryType,
+  mutation: Mutation
 })
 
 module.exports = schema;
