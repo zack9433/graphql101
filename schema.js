@@ -1,6 +1,6 @@
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = require('graphql')
 
-const users = [
+const students = [
   {
     id: '1',
     name: 'zack',
@@ -13,8 +13,8 @@ const users = [
   }
 ]
 
-const UserType = new GraphQLObjectType({
-  name: 'UserType',
+const StudentType = new GraphQLObjectType({
+  name: 'Student',
   fields: {
     id: {
       type: GraphQLString
@@ -28,25 +28,25 @@ const UserType = new GraphQLObjectType({
   }
 })
 
-const RootQuery = new GraphQLObjectType({
+const RootQueryType = new GraphQLObjectType({
   name: 'RootQuery',
   fields: {
-    user: {
-      type: UserType,
+    student: {
+      type: StudentType,
       args: {
         id: {
           type: GraphQLString
         }
       },
       resolve(parent, args) {
-        return users.find(user => user.id === args.id)
+        return students.find(student => student.id === args.id)
       }
     },
   }
 })
 
 const schema = new GraphQLSchema({
-  query: RootQuery
+  query: RootQueryType
 })
 
 module.exports = schema;
