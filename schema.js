@@ -106,6 +106,17 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         return axios.patch(`http://localhost:3001/classes/${args.id}`, args).then(res => res.data)
       }
+    },
+    deleteClass: {
+      type: ClassType,
+      args: {
+        id: {
+          type: GraphQLString
+        }
+      },
+      resolve(parent, { id }) {
+        return axios.delete(`http://localhost:3001/classes/${id}`).then(res => res.data)
+      }
     }
   }
 })
