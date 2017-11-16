@@ -11,5 +11,7 @@ Step by step to introduce GraphQL concepts.
 ## Steps
 
 1. GraphQL query practice.
-2. Integrating third party API.
-3. GraphQL mutation practice.
+2. Integrating with legacy rest API.
+3. GraphQL nested query.
+4. Bi-directional relation
+5. Play with mutation introduction
