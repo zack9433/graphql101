@@ -1,0 +1,42 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "zack",
+      "age": 33,
+      "classId": ["1", "2"]
+    },
+    {
+      "id": "2",
+      "name": "donald",
+      "age": 30,
+      "classId": ["1", "2", "3", "4"]
+    }
+  ],
+  "classes": [
+    {
+      "id": "1",
+      "name": "English",
+      "studentId": ["1", "2"],
+      "description": "This is english class."
+    },
+    {
+      "id": "2",
+      "name": "Math",
+      "studentId": ["1", "2"],
+      "description": "This is Math class."
+    },
+    {
+      "id": "3",
+      "name": "Art",
+      "studentId": ["2"],
+      "description": "This is Art class."
+    },
+    {
+      "id": "4",
+      "name": "Computer Science",
+      "studentId": ["2"],
+      "description": "This is CS class."
+    }
+  ]
+}
