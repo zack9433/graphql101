@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mock": "json-server -p 3001 --watch db.json",
+    "serve": "node server.js",
+    "start": "yarn mock & yarn serve"
   },
   "author": "",
   "license": "ISC",
